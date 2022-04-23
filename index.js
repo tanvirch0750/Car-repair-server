@@ -52,6 +52,28 @@ const run = async () => {
       const result = await serviceCollection.deleteOne(query);
       res.send(result);
     });
+
+    // PUT upadte a user
+    app.put("/service/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedService = req.body;
+      const query = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          name: updatedService.name,
+          description: updatedService.description,
+          price: updatedService.price,
+          img: updatedService.img,
+        },
+      };
+      const result = await serviceCollection.updateOne(
+        query,
+        updatedDoc,
+        options
+      );
+      res.send(result);
+    });
   } finally {
   }
 };
