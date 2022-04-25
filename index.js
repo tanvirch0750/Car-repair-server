@@ -22,6 +22,10 @@ const run = async () => {
     await client.connect();
     const serviceCollection = client.db("CarRepair").collection("service");
 
+    app.get("/", async (req, res) => {
+      res.send("server is running");
+    });
+
     // get service from db
     app.get("/service", async (req, res) => {
       const query = {};
