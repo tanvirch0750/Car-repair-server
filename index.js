@@ -21,6 +21,7 @@ const run = async () => {
   try {
     await client.connect();
     const serviceCollection = client.db("CarRepair").collection("service");
+    const orderCollection = client.db("CarRepair").collection("order");
 
     app.get("/", async (req, res) => {
       res.send("server is running");
@@ -76,6 +77,13 @@ const run = async () => {
         updatedDoc,
         options
       );
+      res.send(result);
+    });
+
+    // order route
+    app.post("/order", async (req, res) => {
+      const order = req.body;
+      const result = await orderCollection.insertOne(order);
       res.send(result);
     });
   } finally {
