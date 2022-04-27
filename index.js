@@ -52,13 +52,7 @@ const run = async () => {
     // Auth
     app.post("/login", async (req, res) => {
       res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader("Access-Control-Allow-Credentials", "true");
-      res.setHeader("Access-Control-Max-Age", "1800");
-      res.setHeader("Access-Control-Allow-Headers", "content-type");
-      res.setHeader(
-        "Access-Control-Allow-Methods",
-        "PUT, POST, GET, DELETE, PATCH, OPTIONS"
-      );
+
       const user = req.body;
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "1d",
@@ -128,13 +122,7 @@ const run = async () => {
 
     app.get("/order", verifyJWT, async (req, res) => {
       res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader("Access-Control-Allow-Credentials", "true");
-      res.setHeader("Access-Control-Max-Age", "1800");
-      res.setHeader("Access-Control-Allow-Headers", "content-type");
-      res.setHeader(
-        "Access-Control-Allow-Methods",
-        "PUT, POST, GET, DELETE, PATCH, OPTIONS"
-      );
+
       const decodedEmail = req.decoded.email;
       const email = req.query.email;
 
