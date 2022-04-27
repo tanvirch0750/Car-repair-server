@@ -110,26 +110,11 @@ const run = async () => {
     });
 
     app.get("/order", verifyJWT, async (req, res) => {
-      const decodedEmail = req.decoded.email;
       const email = req.query.email;
-
-      if (email === decodedEmail) {
-        const query = { email };
-        const cursor = orderCollection.find(query);
-        const orders = await cursor.toArray();
-        res.send(orders);
-      } else {
-        res.status(403).send({ message: "forbidden access" });
-      }
-    });
-
-    // AUTH ROUTE
-    app.post("/login", async (req, res) => {
-      const user = req.body;
-      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "1d",
-      });
-      res.send({ accessToken });
+      const query = { email };
+      const cursor = orderCollection.find(query);
+      const orders = await cursor.toArray();
+      res.send(orders);
     });
   } finally {
   }
