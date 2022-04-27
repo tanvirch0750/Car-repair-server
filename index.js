@@ -8,12 +8,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 //middleware
-const corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 const verifyJWT = (req, res, next) => {
@@ -56,8 +51,6 @@ const run = async () => {
 
     // Auth
     app.post("/login", async (req, res) => {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-
       const user = req.body;
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "1d",
@@ -126,8 +119,6 @@ const run = async () => {
     });
 
     app.get("/order", verifyJWT, async (req, res) => {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-
       const decodedEmail = req.decoded.email;
       const email = req.query.email;
 
