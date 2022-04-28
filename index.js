@@ -7,14 +7,18 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // cors problem: this code is added after the Programming hero session (10:30 AM)
-const corsOptions = {
-  origin: "*",
-};
 
 //middleware
-app.use(cors(corsOptions));
-
+app.use(cors());
 app.use(express.json());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 const verifyJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
