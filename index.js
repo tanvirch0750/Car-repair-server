@@ -6,8 +6,6 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// cors problem: this code is added after the Programming hero session (10:30 AM)
-
 //middleware
 app.use(cors());
 app.use(express.json());
