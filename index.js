@@ -9,8 +9,6 @@ const port = process.env.PORT || 5000;
 // cors problem: this code is added after the Programming hero session (10:30 AM)
 const corsOptions = {
   origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
 };
 
 //middleware
