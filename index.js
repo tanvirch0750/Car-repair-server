@@ -7,17 +7,10 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // cors problem: this code is added after the Programming hero session (10:30 AM)
-const domainsFromEnv = process.env.CORS_DOMAINS || "";
-const whitelist = domainsFromEnv.split(",").map((item) => item.trim());
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
 };
 
 //middleware
